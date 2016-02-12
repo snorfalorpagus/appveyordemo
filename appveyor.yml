@@ -39,8 +39,8 @@ install:
 
 after_test:
 #  - python setup.py bdist_wheel
-  - "mkdir dist\\win-%PYTHON_ARCH%"
-  - "xcopy %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2 dist\\win-%PYTHON_ARCH%\\"
+  - "mkdir dist"
+  - "xcopy %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2 dist\\"
 
 artifacts:
   - path: dist\*
