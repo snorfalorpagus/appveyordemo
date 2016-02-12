@@ -33,9 +33,6 @@ install:
   # Build package
   - "conda build conda-recipe --python %PYTHON_VERSION%"
 
-test_script:
-  - py.test tests
-
 after_test:
 #  - python setup.py bdist_wheel
   - mkdir dist
