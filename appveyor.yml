@@ -39,4 +39,4 @@ test_script:
 #  - python setup.py bdist_wheel
 
 artifacts:
-  - path: "%MINICONDA%\\conda-bld\\*"
+  - path: "%MINICONDA%\\conda-bld\\*-*\\*.tar.bz2"
