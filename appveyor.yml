@@ -24,21 +24,19 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install conda-build anaconda-client
+  - conda install -q conda-build anaconda-client
   #- "conda create -q -n test-environment python=%PYTHON_VERSION% cython pytest"
   #- activate test-environment
   # Configure MSVC. This should come after activating the conda envionment to
   # avoid issues with the length of PATH.
   - appveyor\build.cmd
   # Build package
-  - "conda build conda-recipe --python %PYTHON_VERSION%"
+  - "conda build -q conda-recipe --python %PYTHON_VERSION%"
 
 after_test:
 #  - python setup.py bdist_wheel
   - mkdir dist
-#- "xcopy %MINICONDA%\\conda-bld\\*\\*.tar.bz2 dist\\"
-  - "dir %MINICONDA%\\conda-bld"
-  - "dir %MINICONDA%\\conda-bld\\win-32"
+  - "xcopy %MINICONDA%\\conda-bld\\*\\*.tar.bz2 dist\\"
 
 artifacts:
   - path: dist\*
