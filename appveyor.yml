@@ -1,0 +1,40 @@
+build: false
+
+environment:
+  matrix:
+    - PYTHON_VERSION: 2.7
+      MINICONDA: C:\Miniconda
+
+    - PYTHON_VERSION: 2.7
+      MINICONDA: C:\Miniconda-x64
+
+    - PYTHON_VERSION: 3.4
+      MINICONDA: C:\Miniconda3
+
+    - PYTHON_VERSION: 3.4
+      MINICONDA: C:\Miniconda3-x64
+      DISTUTILS_USE_SDK: 1
+
+init:
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+  - appveyor\build.cmd
+
+install:
+  # create new conda environment
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% cython pytest"
+  - activate test-environment
+  # build package
+  - python setup.py develop
+
+after_test:
+  - python setup.py bdist_wheel
+
+artifacts:
+  - path: dist\*
+
+test_script:
+  - py.test tests
