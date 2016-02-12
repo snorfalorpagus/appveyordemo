@@ -35,8 +35,10 @@ install:
 test_script:
   - py.test tests
 
-#after_test:
+after_test:
 #  - python setup.py bdist_wheel
+  - mkdir dist
+  - "copy %MINICONDA%\\conda-bld\\*-*\\*.tar.bz2 dist\\"
 
 artifacts:
-  - path: "%MINICONDA%\\conda-bld\\*-*\\*.tar.bz2"
+  - path: dist\*
