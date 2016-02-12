@@ -35,8 +35,8 @@ install:
 test_script:
   - py.test tests
 
-after_test:
-  - python setup.py bdist_wheel
+#after_test:
+#  - python setup.py bdist_wheel
 
 artifacts:
-  - path: dist\*
+  - path: "%MINICONDA%\\conda-bld\\*"
